@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sydenham_Library_System.Data;
 
@@ -11,9 +12,11 @@ using Sydenham_Library_System.Data;
 namespace Sydenham_Library_System.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240817151310_ProdSubtbls")]
+    partial class ProdSubtbls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -300,49 +303,6 @@ namespace Sydenham_Library_System.Data.Migrations
                     b.ToTable("PRODUCTTYPES");
                 });
 
-            modelBuilder.Entity("Sydenham_Library_System.Models.PRODUCTS", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("AUTHOR")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AVAILABILITY")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GENRES")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PRODID")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<int>("PRODTYPES")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TITLE")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AUTHOR");
-
-                    b.HasIndex("AVAILABILITY");
-
-                    b.HasIndex("GENRES");
-
-                    b.HasIndex("PRODTYPES");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -392,41 +352,6 @@ namespace Sydenham_Library_System.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Sydenham_Library_System.Models.PRODUCTS", b =>
-                {
-                    b.HasOne("Sydenham_Library_System.Models.AUTHOR", "AUTHORS")
-                        .WithMany()
-                        .HasForeignKey("AUTHOR")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sydenham_Library_System.Models.AVAILABILITY", "Availability")
-                        .WithMany()
-                        .HasForeignKey("AVAILABILITY")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sydenham_Library_System.Models.GENRES", "GENRE")
-                        .WithMany()
-                        .HasForeignKey("GENRES")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sydenham_Library_System.Models.PRODTYPES", "PRODTYPE")
-                        .WithMany()
-                        .HasForeignKey("PRODTYPES")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AUTHORS");
-
-                    b.Navigation("Availability");
-
-                    b.Navigation("GENRE");
-
-                    b.Navigation("PRODTYPE");
                 });
 #pragma warning restore 612, 618
         }

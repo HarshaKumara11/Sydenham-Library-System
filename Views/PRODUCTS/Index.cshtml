@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Sydenham_Library_System.Models.PRODUCTS>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PRODID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TITLE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AUTHORS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PRODTYPE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GENRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Availability)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRODID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TITLE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AUTHORS.AUTHORNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRODTYPE.PRODTYPE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GENRE.GENRENAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Availability.STATUS)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

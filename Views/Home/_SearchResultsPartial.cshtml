@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Sydenham_Library_System.Models.PRODUCTS>
+
+@if (!Model.Any())
+{
+    <p>No books found.</p>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var book in Model)
+        {
+            <li class="list-group-item">
+                <strong>@book.TITLE</strong> - @book.AUTHORS.AuthorName
+            </li>
+        }
+    </ul>
+}
