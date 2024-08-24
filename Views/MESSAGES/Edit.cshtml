@@ -1,0 +1,66 @@
+﻿@model Sydenham_Library_System.Models.MESSAGES
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>MESSAGES</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="From" class="control-label"></label>
+                <input asp-for="From" class="form-control" />
+                <span asp-validation-for="From" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Msgbody" class="control-label"></label>
+                <input asp-for="Msgbody" class="form-control" />
+                <span asp-validation-for="Msgbody" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Createddate" class="control-label"></label>
+                <input asp-for="Createddate" class="form-control" />
+                <span asp-validation-for="Createddate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Readdate" class="control-label"></label>
+                <input asp-for="Readdate" class="form-control" />
+                <span asp-validation-for="Readdate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" />
+                <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

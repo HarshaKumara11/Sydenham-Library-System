@@ -7,8 +7,8 @@
     <nav class="navbar navbar-light bg-white static-top">
         <div class="container d-flex justify-content-end">
             <div class="ml-auto">
-@*                 <a class="btn btn-primary" href="#signup">Sign Up</a> *@
-                <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Admin Login</a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="MESSAGES" asp-action="Create">Contact Admin</a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="Home" asp-action="Index">Admin Login</a>
             </div>
         </div>
     </nav>
@@ -26,11 +26,24 @@
                                 <div class="col">
                                     <input class="form-control form-control-lg" id="searchBook" name="searchBook" type="text" placeholder="Search Books" autocomplete="off" />
                                 </div>
-@*                                 <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div> *@
                             </div>
                         </form>
                         <!-- Search results will be displayed here -->
-                        <div id="searchResults" class="mt-3"></div>
+                        <table class="table table-striped mt-3" id="searchResultsTable" style="display:none;">
+                            <thead>
+                                <tr>
+                                    <th>Item ID</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Product Type</th>
+                                    <th>Genre</th>
+                                    <th>Availability</th>
+                                </tr>
+                            </thead>
+                            <tbody id="searchResultsBody">
+                                <!-- Rows will be dynamically added here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -64,106 +77,6 @@
             </div>
         </div>
     </section>
-@*     <!-- Image Showcases-->
-    <section class="showcase">
-        <div class="container-fluid p-0">
-            <div class="row g-0">
-                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-1.jpg')"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Fully Responsive Design</h2>
-                    <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
-                </div>
-            </div>
-            <div class="row g-0">
-                <div class="col-lg-6 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-2.jpg')"></div>
-                <div class="col-lg-6 my-auto showcase-text">
-                    <h2>Updated For Bootstrap 5</h2>
-                    <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
-                </div>
-            </div>
-            <div class="row g-0">
-                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-3.jpg')"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Easy to Use & Customize</h2>
-                    <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
-                </div>
-            </div>
-        </div>
-    </section> *@
-    <!-- Testimonials-->
-@*     <section class="testimonials text-center bg-light">
-        <div class="container">
-            <h2 class="mb-5">What people are saying...</h2>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="..." />
-                        <h5>Margaret E.</h5>
-                        <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="..." />
-                        <h5>Fred S.</h5>
-                        <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="..." />
-                        <h5>Sarah W.</h5>
-                        <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> *@
-    <!-- Call to Action-->
-@*     <section class="call-to-action text-white text-center" id="signup">
-        <div class="container position-relative">
-            <div class="row justify-content-center">
-                <div class="col-xl-6">
-                    <h2 class="mb-4">Ready to get started? Sign up now!</h2>
-                    <!-- Signup form-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <form class="form-subscribe" id="contactFormFooter" data-sb-form-api-token="API_TOKEN">
-                        <!-- Email address input-->
-                        <div class="row">
-                            <div class="col">
-                                <input class="form-control form-control-lg" id="emailAddressBelow" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:required">Email Address is required.</div>
-                                <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:email">Email Address Email is not valid.</div>
-                            </div>
-                            <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
-                        </div>
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                <p>To activate this form, sign up at</p>
-                                <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
-                        </div>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section> *@
     <!-- Footer-->
     <footer class="bg-body-tertiary text-center">
         <!-- Grid container -->
@@ -233,12 +146,54 @@
         </div>
         <!-- Copyright -->
     </footer>
+    <!-- End Footer-->
 </body>
+
+<!-- Modal Structure to Reserve a Book -->
+<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="bookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">Book Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Dynamic book details will be loaded here -->
+                <p id="modalItemId"></p>
+                <p id="modalBookTitle"></p>
+                <p id="modalBookAuthor"></p>
+                <p id="modalBookProductType"></p>
+                <p id="modalBookGenre"></p>
+                <span style="color:red">
+                    <strong>Please note:</strong> Once you reserve a book, you must collect it from the library within 3 days.
+                    If the book is not collected within this time frame, your reservation will be canceled.</span>
+            </div>
+            <div style="padding-left:3%">
+                <div class="col-md-8 form-group mb-3">
+                    @* <label asp-for="From" class="control-label"></label> *@
+                    <input id="reservationName" class="form-control" placeholder="Your Name" required />
+                    <span  class="text-danger"></span>
+                </div>
+                <div class="col-md-8 form-group mb-3">
+                    @* <label asp-for="Phone" class="control-label"></label> *@
+                    <span class="text-danger"></span>
+                    <input id="reservationPhone" class="form-control" placeholder="Your Phone Number" required />
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="saveReserve" class="btn btn-primary">Reserve</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
+        //Book Search
         $('#searchBook').on('keyup', function () {
             let query = $(this).val();
 
@@ -248,22 +203,40 @@
                     type: 'POST',
                     data: { searchBook: query },
                     success: function (data) {
-                        let results = $('#searchResults');
-                        results.empty(); // Clear previous results
+                        let tableBody = $('#searchResultsBody');
+                        let table = $('#searchResultsTable');
+                        tableBody.empty(); // Clear previous results
 
                         if (data.length > 0) {
+                            table.show(); // Show the table if results are found
+
                             data.forEach(function (book) {
-                                results.append(`
-                                <div class="list-group-item">
-                                    <strong>${book.title}</strong><br>
-                                    Author: ${book.author}<br>
-                                    Product Type: ${book.productType}<br>
-                                    Genre: ${book.genre}
-                                </div>
-                            `);
+                                // Determine the background color based on the availability status
+                                let availabilityColor = '';
+                                let actionButton = ''; // Initialize actionButton as an empty string
+
+                                if (book.availability === 'Available') {
+                                    availabilityColor = 'background-color: green; color: white;';
+                                    actionButton = `<button class="btn btn-sm btn-primary open-modal" data-itemid="${book.itemId}" data-title="${book.title}" data-author="${book.author}" data-producttype="${book.productType}" data-genre="${book.genre}">Reserve</button>`;
+                                } else if (book.availability === 'Reserved') {
+                                    availabilityColor = 'background-color: red; color: white;';
+                                }
+
+                                tableBody.append(`
+                                <tr>
+                                    <td>${book.itemId}</td>
+                                    <td>${book.title}</td>
+                                    <td>${book.author}</td>
+                                    <td>${book.productType}</td>
+                                    <td>${book.genre}</td>
+                                    <td style="${availabilityColor}">${book.availability}</td>
+                                    <td>${actionButton}</td>
+                                </tr>
+                                `);
                             });
                         } else {
-                            results.append('<p>No books found.</p>');
+                            // table.hide(); // Hide the table if no results
+                            tableBody.append('<tr><td colspan="5">No books found.</td></tr>');
                         }
                     },
                     error: function (xhr, status, error) {
@@ -271,7 +244,71 @@
                     }
                 });
             } else {
-                $('#searchResults').html(''); // Clear results if input is empty
+                $('#searchResultsTable').hide(); // Hide the table if the input is empty
+            }
+        });
+
+        function formatAvailabilityCell(availability) {
+            let style = '';
+
+            if (availability === 'Available') {
+                style = 'background-color: green; color: white;';
+            } else if (availability === 'Reserved') {
+                style = 'background-color: red; color: white;';
+            }
+
+            return `<td style="${style}">${availability}</td>`;
+        }
+
+        //JavaScript to Handle Modal Opening
+        $(document).on('click', '.open-modal', function () {
+            // Get book details from the clicked button's data attributes
+            let ItemId = $(this).data('itemid');
+            let title = $(this).data('title');
+            let author = $(this).data('author');
+            let productType = $(this).data('producttype');
+            let genre = $(this).data('genre');
+
+            // Set the book details in the modal
+            $('#modalItemId').text('Item ID: ' + ItemId);
+            $('#modalBookTitle').text('Title: ' + title);
+            $('#modalBookAuthor').text('Author: ' + author);
+            $('#modalBookProductType').text('Product Type: ' + productType);
+            $('#modalBookGenre').text('Genre: ' + genre);
+
+            // Show the modal
+            $('#bookModal').modal('show');
+        });
+        
+        //Create Reservation Record
+        $(document).on('click', '#saveReserve', function () {
+            let itemIdText = $('#modalItemId').text();
+            let itemId = parseInt(itemIdText.replace(/\D/g, '')); // Remove non-digit characters and convert to integer
+            let reservedBy = $('#reservationName').val();
+            let reservedByPhone = $('#reservationPhone').val();
+            console.log(itemId);
+            if (reservedBy && reservedByPhone) {
+                $.ajax({
+                    url: '@Url.Action("CreateReservation", "Reservations")', // Adjust action and controller
+                    type: 'POST',
+                    data: {
+                        Prodid: itemId,
+                        Reservedby: reservedBy,
+                        Reservedbyphone: reservedByPhone
+                    },
+                    success: function (response) {
+                        // Handle success (e.g., close modal, show a success message)
+                        $('#bookModal').modal('hide');
+                        alert('Reservation successful! The book is now reserved.');
+                        window.location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error: " + error); // Log any errors
+                        alert('An error occurred while processing your reservation.');
+                    }
+                });
+            } else {
+                alert('Please fill your name and mobile number.');
             }
         });
     });

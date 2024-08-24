@@ -1,0 +1,62 @@
+﻿@model Sydenham_Library_System.Models.ITEMISSUE
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>@Model.PRODUCTS.TITLE</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Issuedto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Issuedto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Createddate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Createddate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Duedate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Duedate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PRODUCTS)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PRODUCTS.TITLE)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Availability)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Availability.STATUS)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Returndate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Returndate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <form asp-action="UpdateRetuns" asp-route-id="@Model?.ID" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">Update Retunrs</button>
+        <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Back to List</a>
+    </form>
+</div>

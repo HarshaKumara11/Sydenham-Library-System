@@ -27,29 +27,29 @@
             @Html.DisplayNameFor(model => model.AUTHORS)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AUTHORS.ID)
+            @Html.DisplayFor(model => model.AUTHORS.AUTHORNAME)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PRODTYPE)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PRODTYPE.ID)
+            @Html.DisplayFor(model => model.PRODTYPE.PRODTYPE)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.GENRE)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GENRE.ID)
+            @Html.DisplayFor(model => model.GENRE.GENRENAME)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Availability)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Availability.ID)
+            @Html.DisplayFor(model => model.Availability.STATUS)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.ID" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a>
+    <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Back to List</a>
 </div>

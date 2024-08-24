@@ -1,0 +1,59 @@
+﻿@model Sydenham_Library_System.Models.ITEMISSUE
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Prodid" class="control-label"></label>
+                <select asp-for="Prodid" class="form-control" asp-items="ViewBag.Prodid"></select>
+                <span asp-validation-for="Prodid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Issuedto" class="control-label"></label>
+                <input asp-for="Issuedto" class="form-control" />
+                <span asp-validation-for="Issuedto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Createddate" class="control-label"></label>
+                <input asp-for="Createddate" class="form-control" />
+                <span asp-validation-for="Createddate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duedate" class="control-label"></label>
+                <input asp-for="Duedate" class="form-control" />
+                <span asp-validation-for="Duedate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Returndate" class="control-label"></label>
+                <input asp-for="Returndate" class="form-control" />
+                <span asp-validation-for="Returndate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control" asp-items="ViewBag.Status"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" />
+                <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

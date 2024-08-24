@@ -1,0 +1,91 @@
+﻿@model Sydenham_Library_System.Models.ITEMISSUE
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>New Item Issue</h1>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+
+            <div class="form-group">
+                <label asp-for="Prodid" class="control-label"></label>
+                <select asp-for="Prodid" class ="form-control" asp-items="ViewBag.Prodid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Issuedto" class="control-label"></label>
+                <input asp-for="Issuedto" class="form-control" required />
+                <span asp-validation-for="Issuedto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" required />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Createddate" class="control-label"></label>
+                <input asp-for="Createddate" class="form-control" />
+                <span asp-validation-for="Createddate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duedate" class="control-label"></label>
+                <span data-for="Duedate" class="form-control-plaintext"></span>
+                <input asp-for="Duedate" type="hidden" />
+                <span asp-validation-for="Duedate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" />
+                <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const issuedDateInput = document.querySelector('input[name="Createddate"]');
+            const dueDateSpan = document.querySelector('span[data-for="Duedate"]');
+            const dueDateInput = document.querySelector('input[name="Duedate"]');
+
+            function formatDateToString(date) {
+                const year = date.getFullYear();
+                const month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are zero-based
+                const day = ('0' + date.getDate()).slice(-2);
+                return `${year}-${month}-${day} 11:59 PM`;
+            }
+
+            function updateDueDate() {
+                const issuedDateValue = issuedDateInput.value;
+                const issuedDate = new Date(issuedDateValue);
+
+                if (!isNaN(issuedDate.getTime())) {
+                    // Valid date, calculate due date
+                    const dueDate = new Date(issuedDate);
+                    dueDate.setDate(dueDate.getDate() + 14);
+
+                    // Format due date
+                    const dueDateString = formatDateToString(dueDate);
+                    dueDateSpan.textContent = dueDateString;
+                    dueDateInput.value = dueDateString;
+                } else {
+                    // Invalid date, clear due date
+                    dueDateSpan.textContent = '';
+                    dueDateInput.value = '';
+                }
+            }
+
+            issuedDateInput.addEventListener('change', updateDueDate);
+            updateDueDate(); // Initial update
+        });
+    </script>
+}

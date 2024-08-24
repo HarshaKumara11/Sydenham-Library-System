@@ -91,10 +91,10 @@ namespace Sydenham_Library_System.Controllers
             {
                 return NotFound();
             }
-            ViewData["AUTHOR"] = new SelectList(_context.AUTHOR, "ID", "ID", pRODUCTS.AUTHOR);
-            ViewData["AVAILABILITY"] = new SelectList(_context.AVAILABILITY, "ID", "ID", pRODUCTS.AVAILABILITY);
-            ViewData["GENRES"] = new SelectList(_context.GENRES, "ID", "ID", pRODUCTS.GENRES);
-            ViewData["PRODTYPES"] = new SelectList(_context.PRODUCTTYPES, "ID", "ID", pRODUCTS.PRODTYPES);
+            ViewData["AUTHOR"] = new SelectList(_context.AUTHOR, "ID", "AUTHORNAME", pRODUCTS.AUTHOR);
+            ViewData["AVAILABILITY"] = new SelectList(_context.AVAILABILITY, "ID", "STATUS", pRODUCTS.AVAILABILITY);
+            ViewData["GENRES"] = new SelectList(_context.GENRES, "ID", "GENRENAME", pRODUCTS.GENRES);
+            ViewData["PRODTYPES"] = new SelectList(_context.PRODUCTTYPES, "ID", "PRODTYPE", pRODUCTS.PRODTYPES);
             return View(pRODUCTS);
         }
 
@@ -130,10 +130,10 @@ namespace Sydenham_Library_System.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AUTHOR"] = new SelectList(_context.AUTHOR, "ID", "ID", pRODUCTS.AUTHOR);
-            ViewData["AVAILABILITY"] = new SelectList(_context.AVAILABILITY, "ID", "ID", pRODUCTS.AVAILABILITY);
-            ViewData["GENRES"] = new SelectList(_context.GENRES, "ID", "ID", pRODUCTS.GENRES);
-            ViewData["PRODTYPES"] = new SelectList(_context.PRODUCTTYPES, "ID", "ID", pRODUCTS.PRODTYPES);
+            ViewData["AUTHOR"] = new SelectList(_context.AUTHOR, "ID", "AUTHORNAME", pRODUCTS.AUTHOR);
+            ViewData["AVAILABILITY"] = new SelectList(_context.AVAILABILITY, "ID", "STATUS", pRODUCTS.AVAILABILITY);
+            ViewData["GENRES"] = new SelectList(_context.GENRES, "ID", "GENRENAME", pRODUCTS.GENRES);
+            ViewData["PRODTYPES"] = new SelectList(_context.PRODUCTTYPES, "ID", "PRODTYPE", pRODUCTS.PRODTYPES);
             return View(pRODUCTS);
         }
 

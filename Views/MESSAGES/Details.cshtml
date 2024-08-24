@@ -1,0 +1,72 @@
+﻿@model Sydenham_Library_System.Models.MESSAGES
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Message Details</h4>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.From)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Createddate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Createddate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Readdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Readdate)
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Msgbody)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Msgbody)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <form asp-action="ReadUnread" asp-route-id="@Model?.Id" method="post">
+        @Html.AntiForgeryToken()
+        @if (@Model.Status == "UNREAD")
+        {
+            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">Mark as Read</button>
+        } else 
+        {
+            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">Mark as Unread</button>
+        }
+        <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Back to List</a>
+    </form>
+</div>

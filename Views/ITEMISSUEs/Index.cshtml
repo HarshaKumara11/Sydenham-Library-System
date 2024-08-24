@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Sydenham_Library_System.Models.ITEMISSUE>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Items Issues</h1>
+
+<p>
+    <a asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">New Issue</a>
+    <a asp-controller="PRODUCTS" asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">View Items</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Issuedto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createddate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duedate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Returndate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PRODUCTS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Availability)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Issuedto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Createddate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duedate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Returndate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRODUCTS.TITLE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Availability.STATUS)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.ID" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Details</a>
+                @if (item.Status == 3)
+                {
+                    <a asp-action="Delete" asp-route-id="@item.ID" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">Delete</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

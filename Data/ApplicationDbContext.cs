@@ -25,4 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
     public DbSet<GENRES> GENRES { get; set; }
     public DbSet<PRODTYPES> PRODUCTTYPES { get; set; }
     public DbSet<PRODUCTS> Products { get; set; }
+    public DbSet<MESSAGES> MESSAGES { get; set; }
+    public DbSet<RESERVATIONS> RESERVATIONS { get; set; }
+    public DbSet<ITEMISSUE> ITEMISSUES { get; set; }
 }

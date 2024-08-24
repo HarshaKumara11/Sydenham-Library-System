@@ -44,15 +44,19 @@ namespace Sydenham_Library_System.Controllers
                             .Include(b => b.AUTHORS)
                             .Include(b => b.PRODTYPE)
                             .Include(b => b.GENRE)
+                            .Include(b => b.Availability)
                             .Where(b => b.TITLE.Contains(searchBook) ||
                                         b.AUTHORS.AUTHORNAME.Contains(searchBook) ||
-                                        b.PRODTYPE.PRODTYPE.Contains(searchBook))
+                                        b.PRODTYPE.PRODTYPE.Contains(searchBook) ||
+                                        b.GENRE.GENRENAME.Contains(searchBook))
                             .Select(b => new
                             {
+                                ItemId = b.ID,
                                 Title = b.TITLE,
                                 Author = b.AUTHORS.AUTHORNAME,
                                 ProductType = b.PRODTYPE.PRODTYPE,
-                                Genre = b.GENRE.GENRENAME
+                                Genre = b.GENRE.GENRENAME,
+                                Availability = b.Availability.STATUS
                             })
                             .ToList();
             #pragma warning restore CS8602 // Dereference of a possibly null reference.

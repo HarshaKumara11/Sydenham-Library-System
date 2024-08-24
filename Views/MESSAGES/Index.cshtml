@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Sydenham_Library_System.Models.MESSAGES>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Count the unread messages
+    int unreadCount = Model.Count(m => m.Status != "READ");
+}
+<h1>Message Centre</h1>
+
+<!-- Filter Checkbox -->
+<div>
+    <input type="checkbox" id="showUnreadOnly" />
+    <label for="showUnreadOnly">Show only  @unreadCount unread messages</label>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createddate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Readdate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        var rowClass = item.Status == "READ" ? "read-message" : "unread-message";
+        <tr class="@rowClass">
+            <td>
+                @Html.DisplayFor(modelItem => item.From)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @if (item.Status == "READ")
+                {
+                    <span style="color:green;">
+                        <i class="fas fa-check"></i> <!-- Font Awesome check icon -->
+                    </span>
+                } else
+                {
+                    <span style="color:orange;">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <!-- Font Awesome check icon -->
+                    </span>
+                }
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Createddate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Readdate)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">View</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        // Function to handle checkbox state and filter messages
+        function handleCheckboxChange(showUnreadOnly) {
+            var rows = document.querySelectorAll("tr");
+
+            rows.forEach(function (row) {
+                if (row.classList.contains("read-message")) {
+                    row.style.display = showUnreadOnly ? "none" : ""; // Hide or show read messages
+                } else if (row.classList.contains("unread-message")) {
+                    row.style.display = ""; // Always show unread messages
+                }
+            });
+        }
+
+        // Load checkbox state from localStorage on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            var showUnreadOnlyCheckbox = document.getElementById("showUnreadOnly");
+
+            // Retrieve the checkbox state from localStorage
+            var storedState = localStorage.getItem("showUnreadOnly");
+
+            // Set the checkbox state based on stored value
+            if (storedState === "true") {
+                showUnreadOnlyCheckbox.checked = true;
+            }
+
+            // Apply filtering based on initial checkbox state
+            handleCheckboxChange(showUnreadOnlyCheckbox.checked);
+
+            // Add event listener to update the localStorage and filter messages on change
+            showUnreadOnlyCheckbox.addEventListener("change", function () {
+                // Store the checkbox state in localStorage
+                localStorage.setItem("showUnreadOnly", this.checked);
+
+                // Filter the messages based on the new state
+                handleCheckboxChange(this.checked);
+            });
+        });
+    </script>
+}

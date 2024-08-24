@@ -17,7 +17,7 @@ namespace Sydenham_Library_System.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -278,6 +278,90 @@ namespace Sydenham_Library_System.Data.Migrations
                     b.ToTable("GENRES");
                 });
 
+            modelBuilder.Entity("Sydenham_Library_System.Models.ITEMISSUE", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<DateTime>("Createddate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Duedate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Issuedto")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<int>("Prodid")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Returndate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Prodid");
+
+                    b.HasIndex("Status");
+
+                    b.ToTable("ITEMISSUES");
+                });
+
+            modelBuilder.Entity("Sydenham_Library_System.Models.MESSAGES", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Createddate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("From")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Msgbody")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<DateTime?>("Readdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MESSAGES");
+                });
+
             modelBuilder.Entity("Sydenham_Library_System.Models.PRODTYPES", b =>
                 {
                     b.Property<int>("ID")
@@ -343,6 +427,40 @@ namespace Sydenham_Library_System.Data.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Sydenham_Library_System.Models.RESERVATIONS", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Createddate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Duedate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Prodid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reservedby")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Reservedbyphone")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Prodid");
+
+                    b.ToTable("RESERVATIONS");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -394,6 +512,25 @@ namespace Sydenham_Library_System.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Sydenham_Library_System.Models.ITEMISSUE", b =>
+                {
+                    b.HasOne("Sydenham_Library_System.Models.PRODUCTS", "PRODUCTS")
+                        .WithMany()
+                        .HasForeignKey("Prodid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sydenham_Library_System.Models.AVAILABILITY", "Availability")
+                        .WithMany()
+                        .HasForeignKey("Status")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Availability");
+
+                    b.Navigation("PRODUCTS");
+                });
+
             modelBuilder.Entity("Sydenham_Library_System.Models.PRODUCTS", b =>
                 {
                     b.HasOne("Sydenham_Library_System.Models.AUTHOR", "AUTHORS")
@@ -427,6 +564,17 @@ namespace Sydenham_Library_System.Data.Migrations
                     b.Navigation("GENRE");
 
                     b.Navigation("PRODTYPE");
+                });
+
+            modelBuilder.Entity("Sydenham_Library_System.Models.RESERVATIONS", b =>
+                {
+                    b.HasOne("Sydenham_Library_System.Models.PRODUCTS", "PRODUCTS")
+                        .WithMany()
+                        .HasForeignKey("Prodid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PRODUCTS");
                 });
 #pragma warning restore 612, 618
         }
