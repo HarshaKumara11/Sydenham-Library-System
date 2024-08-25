@@ -124,7 +124,7 @@ namespace Sydenham_Library_System.Controllers
             {
                 return NotFound();
             }
-            ViewData["Status"] = new SelectList(_context.AVAILABILITY, "ID", "STATUS", iTEMISSUE.Status);
+            ViewData["Status"] = new SelectList(_context.AVAILABILITY, "ID", "ID", iTEMISSUE.Status);
             ViewData["Prodid"] = new SelectList(_context.Products, "ID", "TITLE", iTEMISSUE.Prodid);
             return View(iTEMISSUE);
         }

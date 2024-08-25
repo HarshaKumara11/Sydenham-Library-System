@@ -56,7 +56,10 @@
 <div>
     <form asp-action="UpdateRetuns" asp-route-id="@Model?.ID" method="post">
         @Html.AntiForgeryToken()
-        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">Update Retunrs</button>
+        @if (Model.Status == 3)
+        {
+            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">Update Retunrs</button>
+        }
         <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Back to List</a>
     </form>
 </div>

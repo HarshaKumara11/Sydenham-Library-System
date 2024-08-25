@@ -5,11 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Online Reservations</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -44,9 +41,8 @@
                 @Html.DisplayFor(modelItem => item.PRODUCTS.TITLE)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">Delete</a>
             </td>
         </tr>
 }

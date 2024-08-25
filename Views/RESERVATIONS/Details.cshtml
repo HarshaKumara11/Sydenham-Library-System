@@ -33,11 +33,11 @@
             @Html.DisplayNameFor(model => model.PRODUCTS)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PRODUCTS.ID)
+            @Html.DisplayFor(model => model.PRODUCTS.TITLE)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="CreateIssue" asp-route-id="@Model.Id" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Issue</a>
+    <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Back to List</a>
 </div>

@@ -48,7 +48,7 @@ namespace Sydenham_Library_System.Controllers
         // GET: RESERVATIONS/Create
         public IActionResult Create()
         {
-            ViewData["Prodid"] = new SelectList(_context.Products, "ID", "ID");
+            ViewData["Prodid"] = new SelectList(_context.Products, "ID", "STATUS");
             return View();
         }
 
@@ -184,13 +184,64 @@ namespace Sydenham_Library_System.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var rESERVATIONS = await _context.RESERVATIONS.FindAsync(id);
+            var ReservedItem = await _context.Products.FirstOrDefaultAsync(p => p.ID == rESERVATIONS.Prodid);
             if (rESERVATIONS != null)
             {
                 _context.RESERVATIONS.Remove(rESERVATIONS);
+                ReservedItem.AVAILABILITY = 1;
+                _context.Update(ReservedItem);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreateIssue(int id)
+        {
+            var reservation = _context.RESERVATIONS
+                .Include(r => r.PRODUCTS)
+                .FirstOrDefault(r => r.Id == id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            // Create a new Issue entity based on the reservation details
+            DateTime TodayDate = DateTime.Now;
+
+            // Adjust DueDate to be 14 days from today with time set to 11:49 PM
+            DateTime dueDate = TodayDate.AddDays(14).Date.Add(new TimeSpan(23, 49, 0));
+
+            var issue = new ITEMISSUE
+            {
+                Prodid = reservation.Prodid,
+                Issuedto = reservation.Reservedby,
+                Phone = reservation.Reservedbyphone,
+                Createddate = TodayDate,
+                Duedate = dueDate,
+                Status = 3
+                //ReservedBy = reservation.Reservedby,
+                //ReservedByPhone = reservation.Reservedbyphone,
+                //ProductTitle = reservation.PRODUCTS.TITLE,
+                //// Set other issue properties as needed
+            };
+
+            // Add the new issue to the database
+            _context.ITEMISSUES.Add(issue);
+            _context.SaveChanges();
+
+            var ReservedItem = _context.Products.FirstOrDefault(p => p.ID == reservation.Prodid);
+            ReservedItem.AVAILABILITY = 3; 
+            _context.Update(ReservedItem);
+            _context.SaveChanges();
+
+            // Remove the reservation from the database
+            _context.RESERVATIONS.Remove(reservation);
+            _context.SaveChanges();
+
+            // Redirect to the newly created issue's details page
+            return RedirectToAction("Details", "ITEMISSUES", new { id = issue.ID });
         }
 
         private bool RESERVATIONSExists(int id)

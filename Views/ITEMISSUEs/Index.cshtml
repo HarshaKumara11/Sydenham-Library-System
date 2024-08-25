@@ -63,10 +63,11 @@
                 @Html.DisplayFor(modelItem => item.Availability.STATUS)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a>
+                
                 <a asp-action="Details" asp-route-id="@item.ID" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Details</a>
                 @if (item.Status == 3)
                 {
+                    <a asp-action="Edit" asp-route-id="@item.ID" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a>
                     <a asp-action="Delete" asp-route-id="@item.ID" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">Delete</a>
                 }
             </td>

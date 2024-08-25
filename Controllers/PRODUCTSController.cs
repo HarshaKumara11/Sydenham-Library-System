@@ -51,10 +51,10 @@ namespace Sydenham_Library_System.Controllers
         // GET: PRODUCTS/Create
         public IActionResult Create()
         {
-            ViewData["AUTHOR"] = new SelectList(_context.AUTHOR, "ID", "ID");
-            ViewData["AVAILABILITY"] = new SelectList(_context.AVAILABILITY, "ID", "ID");
-            ViewData["GENRES"] = new SelectList(_context.GENRES, "ID", "ID");
-            ViewData["PRODTYPES"] = new SelectList(_context.PRODUCTTYPES, "ID", "ID");
+            ViewData["AUTHOR"] = new SelectList(_context.AUTHOR, "ID", "AUTHORNAME");
+            ViewData["AVAILABILITY"] = new SelectList(_context.AVAILABILITY, "ID", "STATUS");
+            ViewData["GENRES"] = new SelectList(_context.GENRES, "ID", "GENRENAME");
+            ViewData["PRODTYPES"] = new SelectList(_context.PRODUCTTYPES, "ID", "PRODTYPE");
             return View();
         }
 
